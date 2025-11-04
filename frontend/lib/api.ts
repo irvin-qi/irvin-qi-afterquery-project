@@ -9,14 +9,12 @@ import type {
   EmailTemplate,
   Invitation,
   InvitationStatus,
-  InvitationScoreSummary,
   LLMConversationMessage,
   OrgProfile,
-  ReviewFeatureScore,
   ReviewLLMAnalysis,
-  ReviewScoreSummary,
   Seed,
   GitHubInstallation,
+  DiffResponse,
 } from "./types";
 
 const RAW_API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
@@ -872,22 +870,6 @@ export async function toggleFeatureScore(
 }
 
 // Diff API
-
-export type DiffResponse = {
-  commits: Array<{
-    sha: string;
-    message: string;
-    author: string;
-    date: string;
-  }>;
-  files: Array<{
-    filename: string;
-    status: string;
-    additions: number;
-    deletions: number;
-    patch?: string;
-  }>;
-};
 
 export async function fetchRepoDiff(
   repoId: string,
