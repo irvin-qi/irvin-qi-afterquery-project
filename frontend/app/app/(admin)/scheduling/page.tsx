@@ -94,14 +94,14 @@ export default function SchedulingPage() {
   // Fetch candidates
   const { data: assessments, isLoading: candidatesLoading } = useQuery({
     queryKey: ["scheduling-candidates"],
-    queryFn: () => getSchedulingCandidates({ accessToken }),
+    queryFn: () => getSchedulingCandidates({ accessToken: accessToken ?? undefined }),
     enabled: !!accessToken,
   });
 
   // Fetch bookings with polling to refresh status
   const { data: bookings, isLoading: bookingsLoading, refetch: refetchBookings } = useQuery({
     queryKey: ["cal-com-bookings"],
-    queryFn: () => getCalComBookings({ accessToken }),
+    queryFn: () => getCalComBookings({ accessToken: accessToken ?? undefined }),
     enabled: !!accessToken,
     refetchInterval: 60000, // Poll every 60 seconds to check for status updates
   });
@@ -109,7 +109,7 @@ export default function SchedulingPage() {
   // Fetch event types
   const { data: eventTypes, isLoading: eventTypesLoading, error: eventTypesError } = useQuery({
     queryKey: ["cal-com-event-types"],
-    queryFn: () => getCalComEventTypes({ accessToken }),
+    queryFn: () => getCalComEventTypes({ accessToken: accessToken ?? undefined }),
     enabled: !!accessToken,
     retry: false, // Don't retry on error to avoid spam
   });
@@ -182,13 +182,13 @@ export default function SchedulingPage() {
     if (!status) return null;
     const statusLower = status.toLowerCase();
     if (statusLower === "confirmed" || statusLower === "accepted") {
-      return <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200"><CheckCircle2 className="h-3 w-3 mr-1" />Confirmed</Badge>;
+      return <Badge className="bg-green-50 text-green-700 border-green-200"><CheckCircle2 className="h-3 w-3 mr-1" />Confirmed</Badge>;
     } else if (statusLower === "pending" || statusLower === "waiting") {
-      return <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-200"><Clock className="h-3 w-3 mr-1" />Pending</Badge>;
+      return <Badge className="bg-yellow-50 text-yellow-700 border-yellow-200"><Clock className="h-3 w-3 mr-1" />Pending</Badge>;
     } else if (statusLower === "cancelled" || statusLower === "rejected") {
-      return <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">Cancelled</Badge>;
+      return <Badge className="bg-red-50 text-red-700 border-red-200">Cancelled</Badge>;
     }
-    return <Badge variant="outline">{status}</Badge>;
+    return <Badge>{status}</Badge>;
   };
 
   // Sync bookings manually
@@ -200,7 +200,7 @@ export default function SchedulingPage() {
     setSyncingBookings(true);
     setSyncResult(null);
     try {
-      const result = await syncCalComBookings({ accessToken });
+      const result = await syncCalComBookings({ accessToken: accessToken ?? undefined });
       setSyncResult(`Synced ${result.updated} of ${result.total} bookings. ${result.errors > 0 ? `${result.errors} errors.` : ""}`);
       // Refresh bookings after sync
       await refetchBookings();
@@ -226,7 +226,7 @@ export default function SchedulingPage() {
 
     setDeletingBookingId(booking.id);
     try {
-      await deleteCalComBooking(booking.id, { accessToken });
+      await deleteCalComBooking(booking.id, { accessToken: accessToken ?? undefined });
       
       // Refresh bookings and candidates after deletion
       await refetchBookings();
@@ -277,7 +277,7 @@ export default function SchedulingPage() {
           eventTypeId: selectedEventType,
           // Don't send startTime - this creates a booking link instead of a specific booking
         },
-        { accessToken },
+        { accessToken: accessToken ?? undefined },
       );
 
       // Show success message
@@ -351,7 +351,7 @@ export default function SchedulingPage() {
           invitationIds: candidateList,
           bookingUrl: firstCandidate.booking.bookingUrl,
         },
-        { accessToken },
+        { accessToken: accessToken ?? undefined },
       );
 
       if (result.failed > 0) {

@@ -213,10 +213,10 @@ export default function GitHubInstallCallbackPage() {
           )}
           
           {status === "pending" ? (
-            <p className="text-sm text-zinc-600">We're confirming your installation with GitHub…</p>
+            <p className="text-sm text-zinc-600">We&apos;re confirming your installation with GitHub…</p>
           ) : null}
           {status === "success" ? (
-            <p className="text-sm text-green-600">Success! You'll be redirected shortly.</p>
+            <p className="text-sm text-green-600">Success! You&apos;ll be redirected shortly.</p>
           ) : null}
           {status === "error" && errorMessage ? (
             <div className="space-y-3">
@@ -226,9 +226,9 @@ export default function GitHubInstallCallbackPage() {
                   <p className="font-medium mb-1">Important: Install on your organization</p>
                   <ul className="list-disc list-inside space-y-1 text-xs">
                     <li>Make sure you select your organization (not your personal account) when installing</li>
-                    <li>Choose "All repositories" when prompted</li>
-                    <li>Complete the installation by clicking "Install" or "Update"</li>
-                    <li>Verify the GitHub App's Callback URL is set correctly in the app settings</li>
+                    <li>Choose &quot;All repositories&quot; when prompted</li>
+                    <li>Complete the installation by clicking &quot;Install&quot; or &quot;Update&quot;</li>
+                    <li>Verify the GitHub App&apos;s Callback URL is set correctly in the app settings</li>
                   </ul>
                 </div>
               ) : null}

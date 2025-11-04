@@ -72,7 +72,7 @@ export function CandidateStartView({ invitation, assessment, seed, repo, startTo
         return {
           ...base,
           label: "Submitted",
-          description: "We'll review your project and follow up soon.",
+          description: "We&apos;ll review your project and follow up soon.",
           container: "border-emerald-200 bg-emerald-50",
           badge: "border-transparent bg-emerald-600 text-white",
         };
@@ -88,7 +88,7 @@ export function CandidateStartView({ invitation, assessment, seed, repo, startTo
         return {
           ...base,
           label: "Accepted",
-          description: "You're cleared to begin whenever you're ready.",
+          description: "You&apos;re cleared to begin whenever you&apos;re ready.",
           container: "border-sky-200 bg-sky-50",
           badge: "border-transparent bg-sky-600 text-white",
         };
@@ -349,7 +349,7 @@ export function CandidateStartView({ invitation, assessment, seed, repo, startTo
           {actionMessage && <p className="text-sm text-green-700">{actionMessage}</p>}
             {isSubmitted && currentInvitation.submittedAt && (
               <p className="text-sm text-green-700">
-                Assessment submitted on {formatDate(currentInvitation.submittedAt)}. We'll be in touch soon.
+                Assessment submitted on {formatDate(currentInvitation.submittedAt)}. We&apos;ll be in touch soon.
               </p>
             )}
           <div className="flex flex-wrap items-center justify-end gap-3">

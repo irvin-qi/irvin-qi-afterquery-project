@@ -24,7 +24,7 @@ import {
   type CreateAssessmentFeaturePayload,
   type AssessmentFeature,
   type InvitationScoreSummary,
-  type ManualRankingRead,
+  type ManualRanking,
 } from "@/lib/api";
 import { useSupabaseAuth } from "@/providers/supabase-provider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -101,7 +101,7 @@ export default function AssessmentDetailPage() {
   const {
     data: manualRanking,
     isLoading: loadingRanking,
-  } = useQuery<ManualRankingRead | null>({
+  } = useQuery<ManualRanking | null>({
     queryKey: ["manual-ranking", assessment?.id],
     queryFn: async () => {
       if (!assessment || !accessToken) {
@@ -130,7 +130,7 @@ export default function AssessmentDetailPage() {
       }
     }
     loadFeatures();
-  }, [assessment?.id, accessToken]);
+  }, [assessment, accessToken]);
 
   // Load invitation scores - only reload when assessment ID changes or explicitly requested
   useEffect(() => {
@@ -140,7 +140,6 @@ export default function AssessmentDetailPage() {
       pathname,
       loadedAssessmentId: loadedAssessmentIdRef.current,
       isLoading: isLoadingScoresRef.current,
-      scoresCount: Object.keys(invitationScores).length,
     });
 
     async function loadScores(forceReload = false) {
@@ -160,7 +159,6 @@ export default function AssessmentDetailPage() {
         assessmentChanged,
         currentAssessmentId: assessment.id,
         loadedAssessmentId: loadedAssessmentIdRef.current,
-        scoresCount: Object.keys(invitationScores).length,
       });
 
       if (!forceReload && !assessmentChanged) {
@@ -221,7 +219,7 @@ export default function AssessmentDetailPage() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("focus", handleFocus);
     };
-  }, [assessment?.id, accessToken, pathname]);
+  }, [assessment, accessToken, pathname]);
 
   async function handleSaveRubric() {
     if (!assessment || !accessToken) return;
@@ -528,7 +526,7 @@ export default function AssessmentDetailPage() {
                 <p className="py-4 text-sm text-zinc-500">Loading features...</p>
               ) : features.length === 0 ? (
                 <p className="py-8 text-center text-sm text-zinc-500">
-                  No features defined yet. Click "Add Feature" to get started.
+                  No features defined yet. Click &quot;Add Feature&quot; to get started.
                 </p>
               ) : (
                 <div className="space-y-3">
@@ -537,7 +535,7 @@ export default function AssessmentDetailPage() {
                       <div className="flex-1">
                         <div className="flex items-center gap-3">
                           <h4 className="font-medium text-zinc-900">{feature.name}</h4>
-                          <Badge variant="outline">Weight: {feature.weight}</Badge>
+                          <Badge className="border-zinc-200 bg-zinc-50 text-zinc-700">Weight: {feature.weight}</Badge>
                         </div>
                         {feature.description && (
                           <p className="mt-1 text-sm text-zinc-600">{feature.description}</p>
@@ -585,7 +583,7 @@ export default function AssessmentDetailPage() {
                   : "Candidates are ranked in manual order."}
               </CardDescription>
             </div>
-            <Badge variant="outline" className="capitalize">
+            <Badge className="capitalize border-zinc-200 bg-zinc-50 text-zinc-700">
               {sortMode === "auto" ? "Auto Ranking" : "Manual Ranking"}
             </Badge>
           </div>

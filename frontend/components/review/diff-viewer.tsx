@@ -220,21 +220,21 @@ ${patchText}`;
                     <span className="truncate">{file.filename}</span>
                     <div className="ml-2 flex items-center gap-1">
                       {file.status === "added" && (
-                        <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                        <Badge className="bg-green-50 text-green-700 border-green-200">
                           +{file.additions}
                         </Badge>
                       )}
                       {file.status === "removed" && (
-                        <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
+                        <Badge className="bg-red-50 text-red-700 border-red-200">
                           -{file.deletions}
                         </Badge>
                       )}
                       {(file.status === "modified" || file.status === "renamed") && (
                         <>
-                          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                          <Badge className="bg-green-50 text-green-700 border-green-200">
                             +{file.additions}
                           </Badge>
-                          <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
+                          <Badge className="bg-red-50 text-red-700 border-red-200">
                             -{file.deletions}
                           </Badge>
                         </>

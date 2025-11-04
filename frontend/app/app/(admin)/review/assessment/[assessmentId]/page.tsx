@@ -36,7 +36,7 @@ import {
   getManualRanking,
   saveManualRanking,
   clearManualRanking,
-  type ManualRankingRead,
+  type ManualRanking,
   updateAssessment,
 } from "@/lib/api";
 import { useSupabaseAuth } from "@/providers/supabase-provider";
@@ -165,7 +165,7 @@ export default function AssessmentReviewPage() {
   const {
     data: manualRanking,
     isLoading: loadingRanking,
-  } = useQuery<ManualRankingRead | null>({
+  } = useQuery<ManualRanking | null>({
     queryKey: ["manual-ranking", assessmentId],
     queryFn: async () => {
       if (!assessment || !accessToken) {

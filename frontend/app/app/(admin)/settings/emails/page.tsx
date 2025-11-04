@@ -30,10 +30,10 @@ const TEMPLATE_CONFIGS = [
   {
     key: "candidate_submission_received",
     title: "Submission received",
-    description: "Confirm that the candidate's work arrived after they submit.",
+    description: "Confirm that the candidate&apos;s work arrived after they submit.",
     recommendedSubject: "Thanks for submitting {assessment_title}",
     recommendedBody:
-      "Hi {candidate_name}, we received your submission for {assessment_title}. We'll review your work shortly.",
+      "Hi {candidate_name}, we received your submission for {assessment_title}. We&apos;ll review your work shortly.",
   },
 ] as const;
 

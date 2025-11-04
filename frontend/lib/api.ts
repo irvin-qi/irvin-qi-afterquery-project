@@ -355,6 +355,7 @@ export async function startCandidateAssessment(
 export type SubmitCandidateAssessmentPayload = {
   finalSha?: string;
   repoHtmlUrl?: string;
+  videoUrl?: string;
 };
 
 export async function submitCandidateAssessment(

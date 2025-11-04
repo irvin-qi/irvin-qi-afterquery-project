@@ -139,7 +139,7 @@ export default function ReviewWorkspacePage() {
     }
 
     loadScoringData();
-  }, [invitation?.id, accessToken]);
+  }, [invitation, accessToken]);
 
   async function handleToggleFeature(featureId: string) {
     if (!invitation || !accessToken || !featureId || togglingFeature) {
@@ -321,7 +321,7 @@ export default function ReviewWorkspacePage() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-base">Submission Video</CardTitle>
-                    <CardDescription>Candidate's video walkthrough of their solution.</CardDescription>
+                    <CardDescription>Candidate&apos;s video walkthrough of their solution.</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <VideoPlayer url={invitation.videoUrl} />
@@ -405,7 +405,7 @@ export default function ReviewWorkspacePage() {
                                 <p className="mt-1 text-sm text-zinc-600">{feature.description}</p>
                               )}
                             </div>
-                            <Badge variant="outline">Weight: {feature.weight}</Badge>
+                            <Badge className="border-zinc-200 bg-zinc-50 text-zinc-700">Weight: {feature.weight}</Badge>
                           </div>
                         );
                       })}
