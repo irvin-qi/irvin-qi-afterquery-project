@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 9 9 11;
+    --muted: 244 244 245;
+    --muted-foreground: 113 113 122;
+    --border: 228 228 231;
+  }
+
+  body {
+    @apply bg-white text-zinc-900 font-sans;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-zinc-200 bg-white shadow-sm;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

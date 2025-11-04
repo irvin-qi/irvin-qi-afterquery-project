@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+pydantic-settings
+email-validator
+asyncpg
+python-dotenv
+httpx
+pyjwt
+cryptography
